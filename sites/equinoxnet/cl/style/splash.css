@@ -1,0 +1,73 @@
+div#bg {
+	width: 50%;
+	height: 100%;
+
+	position: absolute;
+	left: 50%;
+	
+	background: #4280a8 url("../img/bg.png");
+}
+
+a#logo {
+	display: block;
+	
+	width: 100%;
+	height: 74px;
+
+	position: absolute;
+	top: 38%;
+	
+	background: 50% top url("../img/splash/wordmark.png") no-repeat;
+}
+a#logo h1 {
+	display: none;
+}
+
+div#textu {
+	width: 100%;
+	height: 50px;
+	margin: 80px 0 0;
+
+	position: absolute;
+	top: 38%;
+	
+	background: 50% bottom url("../img/splash/text.png") no-repeat;
+}
+
+div#textu a#text1 {
+	display: block;
+	
+	width: 100%;
+	height: 31px;
+
+	position: relative;
+	top: -6px;
+}
+div#textu a#text1 h2 {
+	display: none;
+}
+
+div#textu a#text2 {
+	display: block;
+	
+	width: 100%;
+	height: 32px;
+
+	position: relative;
+	top: -6px;
+}
+div#textu a#text2 h2 {
+	display: none;
+}
+
+a#logo2 {
+	display: block;
+	
+	width: 100%;
+	height: 81px;
+
+	position: absolute;
+	bottom: 50px;
+	
+	background: 50% center url("../img/splash/logo.png") no-repeat;
+}
