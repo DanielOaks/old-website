@@ -1,0 +1,149 @@
+// Welcome to Compass.
+// In this file you should write your main styles. (or centralize your imports)
+// Import this file using the following HTML or equivalent:
+// <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+
+@import "compass/reset";
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background: #274961 url('../img/bg.png') repeat fixed;
+    font-family: 'Delicious', sans-serif;
+
+    #container {
+        width: 870px;
+        margin: 0 auto;
+
+        #header {
+            margin: 1em 0;
+
+            a {
+                display: inline-block;
+                margin-right: 6pt;
+                color: #eee;
+
+                &.logo {
+                    font-weight: 900;
+                    font-size: 3.8em;
+                }
+
+                &.b {
+                    font-size: 1.25em;
+                    &:hover { color: #bbd; }
+                }
+            }
+        }
+
+        #col-l {
+            min-height: 324px;
+            width: 600px;
+            padding: 19px 19px 19px;
+            float: left;
+            
+            background: #fff;
+            border-radius: 7px;
+            
+            line-height: 1.2;
+
+            h1 {
+                display: block;
+                font-size: 24pt;
+                padding: 0 0 17px;
+                margin: -3px 0 0;
+                font-weight: bold;
+            }
+            h2 {
+                display: inline-block;
+                font-size: 15pt;
+                padding: 0 0 5px 0;
+                font-weight: bold;
+            }
+            .time {
+                display: inline-block;
+                margin-left: 5pt;
+            }
+
+            .post {
+                display: block;
+                margin-right: -19px;
+                margin-bottom: 31px;
+                color: #000;
+
+                &.blog, &.code, &.design, &.image img {
+                    border-radius: 4px 0 0 4px;
+                }
+                &.blog, &.code, &.design {
+                    padding: 15px 30px 15px 70px;
+                }
+
+                &.code { background: #dadada url('../img/icons/code.png') 20px 18px no-repeat; }
+                &.blog { background: #cacfff url('../img/icons/blog.png') 20px 18px no-repeat; }
+                &.design { background: #dfffda url('../img/icons/design.png') 20px 18px no-repeat; }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+            .link {
+                display: block;
+                float: right;
+            }
+            // Next/Prev
+            .pagination {
+                text-align: center;
+                a {
+                    display: inline-block;
+                    margin: 0 auto;
+                    padding: 10pt 15pt;
+                }
+            }
+        }
+        #col-r {
+            position: fixed;
+            
+            min-height: 50px;
+            width: 180px;
+            padding: 16px 20px 20px 32px;
+            margin: 19px 0 0 638px;
+            
+            background: #9abbd2 url('../img/col-r-shadow.png') left repeat-y;
+            border-radius: 0 7px 7px 0;
+
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            font-size: 10pt;
+
+            h3 {
+                display: block;
+                padding-bottom: 2pt;
+                font-weight: bold;
+                &:not(:first-child) {
+                    padding-top: 7pt;
+                }
+            }
+
+            .sep {
+                margin-top: 5pt;
+            }
+        }
+        .col-clear {
+            clear: both;
+        }
+
+        #footer {
+            height: 30px;
+            padding: 5px 0 0;
+            
+            color: #fff;
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            font-size: 9pt;
+
+            a {
+                color: #ace;
+                font-style: italic;
+            }
+        }
+    }
+}

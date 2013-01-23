@@ -1,0 +1,47 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font: inherit; font-size: 100%; vertical-align: baseline; }
+
+html { line-height: 1; }
+
+ol, ul { list-style: none; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+
+caption, th, td { text-align: left; font-weight: normal; vertical-align: middle; }
+
+q, blockquote { quotes: none; }
+q:before, q:after, blockquote:before, blockquote:after { content: ""; content: none; }
+
+a img { border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary { display: block; }
+
+a { text-decoration: none; }
+
+body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Delicious", sans-serif; }
+body #container { width: 870px; margin: 0 auto; }
+body #container #header { margin: 1em 0; }
+body #container #header a { display: inline-block; margin-right: 6pt; color: #eee; }
+body #container #header a.logo { font-weight: 900; font-size: 3.8em; }
+body #container #header a.b { font-size: 1.25em; }
+body #container #header a.b:hover { color: #bbd; }
+body #container #col-l { min-height: 324px; width: 600px; padding: 19px 19px 19px; float: left; background: #fff; border-radius: 7px; line-height: 1.2; }
+body #container #col-l h1 { display: block; font-size: 24pt; padding: 0 0 17px; margin: -3px 0 0; font-weight: bold; }
+body #container #col-l h2 { display: inline-block; font-size: 15pt; padding: 0 0 5px 0; font-weight: bold; }
+body #container #col-l .time { display: inline-block; margin-left: 5pt; }
+body #container #col-l .post { display: block; margin-right: -19px; margin-bottom: 31px; color: #000; }
+body #container #col-l .post.blog, body #container #col-l .post.code, body #container #col-l .post.design, body #container #col-l .post.image img { border-radius: 4px 0 0 4px; }
+body #container #col-l .post.blog, body #container #col-l .post.code, body #container #col-l .post.design { padding: 15px 30px 15px 70px; }
+body #container #col-l .post.code { background: #dadada url("../img/icons/code.png") 20px 18px no-repeat; }
+body #container #col-l .post.blog { background: #cacfff url("../img/icons/blog.png") 20px 18px no-repeat; }
+body #container #col-l .post.design { background: #dfffda url("../img/icons/design.png") 20px 18px no-repeat; }
+body #container #col-l .post:last-child { margin-bottom: 0; }
+body #container #col-l .link { display: block; float: right; }
+body #container #col-l .pagination { text-align: center; }
+body #container #col-l .pagination a { display: inline-block; margin: 0 auto; padding: 10pt 15pt; }
+body #container #col-r { position: fixed; min-height: 50px; width: 180px; padding: 16px 20px 20px 32px; margin: 19px 0 0 638px; background: #9abbd2 url("../img/col-r-shadow.png") left repeat-y; border-radius: 0 7px 7px 0; font-family: "Trebuchet MS", Helvetica, sans-serif; font-size: 10pt; }
+body #container #col-r h3 { display: block; padding-bottom: 2pt; font-weight: bold; }
+body #container #col-r h3:not(:first-child) { padding-top: 7pt; }
+body #container #col-r .sep { margin-top: 5pt; }
+body #container .col-clear { clear: both; }
+body #container #footer { height: 30px; padding: 5px 0 0; color: #fff; font-family: "Trebuchet MS", Helvetica, sans-serif; font-size: 9pt; }
+body #container #footer a { color: #ace; font-style: italic; }
