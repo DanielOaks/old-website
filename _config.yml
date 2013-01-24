@@ -8,7 +8,12 @@ exclude:
   - .sass-cache
 
 # Enable Pagination, because we're awesome like that
-paginate: 10
+paginate: 8
+paginate_path: page/:num
+paginate_category_path: ":category/page/:num"
 
 # And building into custom directory
 destination: ../danneh.github.com.production/_site
+
+pygments: true
+markdown: rdiscount

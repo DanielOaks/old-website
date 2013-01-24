@@ -1,23 +1,23 @@
-{% if post.type == "soundcloud" %}
-<div class="post soundcloud">
-    {{ post.embed }}
-</div>
-{% elsif post.type == "image" %}
-<a class="post image" href="{{ post.url }}"><img src="/img/post/{{ post.image }}" /></a>
-{% elsif post.type == "imagelink" %}
-<a class="post image" href="{{ post.link }}"><img src="/img/post/{{ post.image }}" /></a>
-{% elsif post.type == "shortlink" %}
-<a class="post {{ post.category }}" href="{{ post.link }}">
-    <h2>{{ post.title }}</h2> <span class="time">{{ post.date | date_to_string }}</span>
-    <div class="text">
-        {{ post.short }}
-    </div>
-</a>
-{% else %}
-<a class="post {{ post.category }}" href="{{ post.url }}">
-    <h2>{{ post.title }}</h2> <span class="time">{{ post.date | date_to_string }}</span>
-    <div class="text">
-        {{ post.short }}
-    </div>
-</a>
-{% endif %}
+                    {% if post.type == "soundcloud" %}
+                    <div class="post soundcloud">
+                        {{ post.embed }}
+                    </div>
+                    {% elsif post.type == "image" %}
+                    <a class="post image" href="{{ post.url }}"><img src="/img/post/{{ post.image }}" /></a>
+                    {% elsif post.type == "imagelink" %}
+                    <a class="post image" href="{{ post.link }}"><img src="/img/post/{{ post.image }}" /></a>
+                    {% elsif post.type == "shortlink" %}
+                    <a class="post {{ post.category }}" href="{{ post.link }}">
+                        <h2>{{ post.title }}</h2> <span class="time">{{ post.date | date_to_string }}</span>
+                        <div class="text">
+                            {{ post.short }}
+                        </div>
+                    </a>
+                    {% else %}
+                    <a class="post {{ post.category }}" href="{{ post.url }}">
+                        <h2>{{ post.title }}</h2> <span class="time">{{ post.date | date_to_string }}</span>
+                        <div class="text">
+                            {{ post.short }}
+                        </div>
+                    </a>
+                    {% endif %}

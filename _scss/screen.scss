@@ -50,7 +50,7 @@ body {
             line-height: 1.2;
 
             h1 {
-                display: block;
+                display: inline-block;
                 font-size: 180%;
                 padding: 0 0 17px;
                 margin: -3px 0 0;
@@ -94,6 +94,8 @@ body {
             }
             // Next/Prev
             .pagination {
+                display: inline-block;
+                float: right;
                 text-align: center;
                 a {
                     display: inline-block;
