@@ -38,7 +38,7 @@ body {
         }
 
         #col-l {
-            min-height: 324px;
+            min-height: 404px;
             width: 600px;
             padding: 19px 19px 19px;
             float: left;
@@ -46,19 +46,20 @@ body {
             background: #fff;
             border-radius: 7px;
             
+            font-size: 110%;
             line-height: 1.2;
 
             h1 {
                 display: block;
-                font-size: 24pt;
+                font-size: 180%;
                 padding: 0 0 17px;
                 margin: -3px 0 0;
                 font-weight: bold;
             }
             h2 {
                 display: inline-block;
-                font-size: 15pt;
-                padding: 0 0 5px 0;
+                font-size: 125%;
+                padding-bottom: 2pt;
                 font-weight: bold;
             }
             .time {
@@ -114,6 +115,7 @@ body {
 
             font-family: "Trebuchet MS", Helvetica, sans-serif;
             font-size: 10pt;
+            line-height: 1.2;
 
             h3 {
                 display: block;

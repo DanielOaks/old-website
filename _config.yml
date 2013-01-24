@@ -11,4 +11,4 @@ exclude:
 paginate: 10
 
 # And building into custom directory
-destination: ../danneh.github.com.production
+destination: ../danneh.github.com.production/_site

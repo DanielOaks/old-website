@@ -24,9 +24,9 @@ body #container #header a { display: inline-block; margin-right: 6pt; color: #ee
 body #container #header a.logo { font-weight: 900; font-size: 3.8em; }
 body #container #header a.b { font-size: 1.25em; }
 body #container #header a.b:hover { color: #bbd; }
-body #container #col-l { min-height: 324px; width: 600px; padding: 19px 19px 19px; float: left; background: #fff; border-radius: 7px; line-height: 1.2; }
-body #container #col-l h1 { display: block; font-size: 24pt; padding: 0 0 17px; margin: -3px 0 0; font-weight: bold; }
-body #container #col-l h2 { display: inline-block; font-size: 15pt; padding: 0 0 5px 0; font-weight: bold; }
+body #container #col-l { min-height: 404px; width: 600px; padding: 19px 19px 19px; float: left; background: #fff; border-radius: 7px; font-size: 110%; line-height: 1.2; }
+body #container #col-l h1 { display: block; font-size: 180%; padding: 0 0 17px; margin: -3px 0 0; font-weight: bold; }
+body #container #col-l h2 { display: inline-block; font-size: 125%; padding-bottom: 2pt; font-weight: bold; }
 body #container #col-l .time { display: inline-block; margin-left: 5pt; }
 body #container #col-l .post { display: block; margin-right: -19px; margin-bottom: 31px; color: #000; }
 body #container #col-l .post.blog, body #container #col-l .post.code, body #container #col-l .post.design, body #container #col-l .post.image img { border-radius: 4px 0 0 4px; }
@@ -38,7 +38,7 @@ body #container #col-l .post:last-child { margin-bottom: 0; }
 body #container #col-l .link { display: block; float: right; }
 body #container #col-l .pagination { text-align: center; }
 body #container #col-l .pagination a { display: inline-block; margin: 0 auto; padding: 10pt 15pt; }
-body #container #col-r { position: fixed; min-height: 50px; width: 180px; padding: 16px 20px 20px 32px; margin: 19px 0 0 638px; background: #9abbd2 url("../img/col-r-shadow.png") left repeat-y; border-radius: 0 7px 7px 0; font-family: "Trebuchet MS", Helvetica, sans-serif; font-size: 10pt; }
+body #container #col-r { position: fixed; min-height: 50px; width: 180px; padding: 16px 20px 20px 32px; margin: 19px 0 0 638px; background: #9abbd2 url("../img/col-r-shadow.png") left repeat-y; border-radius: 0 7px 7px 0; font-family: "Trebuchet MS", Helvetica, sans-serif; font-size: 10pt; line-height: 1.2; }
 body #container #col-r h3 { display: block; padding-bottom: 2pt; font-weight: bold; }
 body #container #col-r h3:not(:first-child) { padding-top: 7pt; }
 body #container #col-r .sep { margin-top: 5pt; }
