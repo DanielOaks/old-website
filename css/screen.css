@@ -35,6 +35,8 @@ body #container #col-l .post.code { background: #dadada url("../img/icons/code.p
 body #container #col-l .post.blog { background: #cacfff url("../img/icons/blog.png") 20px 18px no-repeat; }
 body #container #col-l .post.design { background: #dfffda url("../img/icons/design.png") 20px 18px no-repeat; }
 body #container #col-l .post:last-child { margin-bottom: 0; }
+body #container #col-l p { margin-bottom: 1em; }
+body #container #col-l .tags { margin-top: 2em; }
 body #container #col-l .link { display: block; float: right; }
 body #container #col-l .pagination { display: inline-block; float: right; text-align: center; }
 body #container #col-l .pagination a { display: inline-block; margin: 0 auto; padding: 10pt 15pt; }
@@ -45,3 +47,14 @@ body #container #col-r .sep { margin-top: 5pt; }
 body #container .col-clear { clear: both; }
 body #container #footer { height: 30px; padding: 5px 0 0; color: #fff; font-family: "Trebuchet MS", Helvetica, sans-serif; font-size: 9pt; }
 body #container #footer a { color: #ace; font-style: italic; }
+
+pre, code, tt { font-family: Consolas, "Liberation Mono", Courier, monospace; }
+
+code, .highlight { background: #f8f8f8; border-radius: 3pt; border: 1px #cccccc solid; }
+
+code { padding: 2pt 3pt 1pt; font-size: 14px; }
+
+.highlight { display: block; overflow-x: scroll; line-height: 19px; padding: 7pt 8pt; }
+.highlight code { background: none; padding: 0 0; border: none; font-size: 13px; }
+
+ul li { margin-left: 1em; margin-bottom: 1em; list-style: square; }
