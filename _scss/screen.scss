@@ -88,6 +88,15 @@ body {
                     margin-bottom: 0;
                 }
             }
+            p {
+                margin-bottom: 1em;
+                &:not(:first-of-type) {
+                    //text-indent: 1em;
+                }
+            }
+            .tags {
+                margin-top: 2em;
+            }
             .link {
                 display: block;
                 float: right;
@@ -150,4 +159,37 @@ body {
             }
         }
     }
+}
+
+// Code
+pre, code, tt {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+}
+code, .highlight {
+    background: #f8f8f8;
+    border-radius: 3pt;
+    border: 1px #ccc solid;
+}
+code {
+    padding: 2pt 3pt 1pt;
+    font-size: 14px;
+}
+.highlight {
+    display: block;
+    overflow-x: scroll;
+    line-height: 19px;
+    padding: 7pt 8pt;
+    & code {
+        background: none;
+        padding: 0 0;
+        border: none;
+        font-size: 13px;
+    }
+}
+
+// Lists
+ul li {
+    margin-left: 1em;
+    margin-bottom: 1em;
+    list-style: square;
 }

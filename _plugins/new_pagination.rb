@@ -1,3 +1,11 @@
+##
+# This plugin extends the default Pagination to allow people to
+# easily paginate category pages
+#
+# It does this by modifying the built-in Jekyll Pagination object,
+# and is hacked together from the original Pagination code, and
+# the plugin {here}[http://www.marran.com/tech/category-pagination-in-jekyll/]
+
 module Jekyll
 
   class Pagination < Generator
@@ -10,6 +18,10 @@ module Jekyll
     #
     # Returns nothing.
     def generate(site)
+      # Manually call this here, otherwise this gets called before the page
+      # generator, and the category pages don't exist before we paginate
+      PageGenerator.new().generate(site)
+
       site.pages.dup.each do |page|
         paginate(site, page) if Pager.pagination_enabled?(site.config, page.name)
       end
@@ -31,9 +43,12 @@ module Jekyll
     #                   "next_page" => <Number> }}
     def paginate(site, page)
       category = page.data['category']
+      tag = page.data['tag']
 
       if category
         posts = site.categories[category].reverse
+      elsif tag
+        posts = site.tags[tag].reverse
       else
         posts = site.site_payload['site']['posts']
       end
@@ -42,36 +57,50 @@ module Jekyll
 
       # iterate over the total number of pages and create a physical page for each
       (1..pages).each do |num_page|
-
-        pager = Pager.new(site.config, num_page, posts, File.join(page.dir, paginate_path(site, category)), pages)
+        pager = Pager.new(site.config, num_page, posts, File.join(page.dir, paginate_path(site, category, tag)), pages)
 
         # the first page is the index, so no page needs to be created. However, the subsequent pages need to be generated
-          if num_page > 1
-            if category
-              newpage = CategorySubPage.new(site, site.source, category, page.data['category_layout'])
-            else
-              newpage = Page.new(site, site.source, page.dir, page.name)
-            end
-
-            newpage.pager = pager
-            newpage.dir = File.join(page.dir, paginate_path(site, category).sub(':num', num_page.to_s))
-            site.pages << newpage
+        if num_page > 1
+          if category
+            newpage = CategorySubPage.new(site, site.source, category, page.data['category_layout'])
+          elsif tag
+            newpage = TagSubPage.new(site, site.source, tag, page.data['tag_layout'])
           else
-            page.pager = pager
+            newpage = Page.new(site, site.source, page.dir, page.name)
           end
 
+          newpage.pager = pager
+          newpage.dir = File.join(page.dir, paginate_path(site, category, tag).sub(':num', num_page.to_s))
+          site.pages << newpage
+        else
+          page.pager = pager
+        end
       end
     end
 
     private
-      def paginate_path(site, category = false)
+      # Gives us the pagination path to use.
+      #
+      # site - The Site.
+      # category - The category, (default: false).
+      # tag = The tag, (default: false).
+      #
+      # Returns a string that can is used as: returned.sub(':num', number)
+      def paginate_path(site, category = false, tag = false)
         if category
           if site.config['paginate_category_path']
             format = site.config['paginate_category_path']
           else
-            format = ":category/page:num"
+            format = ":category/page/:num"
           end
           format.sub(':category', category)
+        elsif tag
+          if site.config['paginate_tag_path']
+            format = site.config['paginate_tag_path']
+          else
+            format = "tags/:tag/page/:num"
+          end
+          format.sub(':tag', tag)
         else
           site.config['paginate_path']
         end
@@ -106,7 +135,7 @@ module Jekyll
     # config    - The Hash configuration of the site.
     # page      - The Integer page number.
     # posts     - The Array of Posts.
-    # page_url  - URL to next/prev pages
+    # page_url  - URL to next/prev pages, subbing ':num' for the page number
     # num_pages - The Integer number of pages or nil if you'd like the number
     #             of pages calculated.
     def initialize(config, page, posts, page_url, num_pages = nil)
@@ -147,25 +176,53 @@ module Jekyll
     end
   end
 
-  # The CategorySubPage class creates a single category page for the specified tag.
-  # This class exists to specify the layout to use for pages after the first index page
+  # The CategorySubPage class creates a single category page.
+  # This class exists to specify the layout to use for pages after the first index page.
   class CategorySubPage < Page
     
+    # Initialize the page, and set the appropriate Page variables based on the given
+    # category-based input variables.
+    #
+    # site - The Site.
+    # base - The Site's base directory.
+    # category - The directory the Page is showing
+    # laying - The Layout to use for this page
     def initialize(site, base, category, layout)
-        
       @site = site
       @base = base
       @dir  = category
       @name = 'index.html'
 
       self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), layout || 'category_index.html')
+      self.read_yaml(File.join(base, '_layouts'), layout || 'autogen_index.html')
 
-      title_prefix             = site.config['cateogry_title_prefix'] || ''
-      self.data['title']       = "#{title_prefix}#{category}"
-
+      title_prefix       = site.config['cateogry_title_prefix'] || ''
+      self.data['title'] = "#{title_prefix}#{category.capitalize}"
     end
-    
   end
 
+  # The TagSubPage class creates a single tag page.
+  # This class exists to specify the layout to use for pages after the first index page.
+  class TagSubPage < Page
+    
+    # Initialize the page, and set the appropriate Page variables based on the given
+    # category-based input variables.
+    #
+    # site - The Site.
+    # base - The Site's base directory.
+    # tag - The directory the Page is showing
+    # laying - The Layout to use for this page
+    def initialize(site, base, tag, layout)
+      @site = site
+      @base = base
+      @dir  = File.join('tags', tag)
+      @name = 'index.html'
+
+      self.process(@name)
+      self.read_yaml(File.join(base, '_layouts'), layout || 'autogen_index.html')
+
+      title_prefix       = site.config['tag_title_prefix'] || 'Tag: '
+      self.data['title'] = "#{title_prefix}#{tag.capitalize}"
+    end
+  end
 end

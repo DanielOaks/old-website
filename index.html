@@ -1,17 +1,4 @@
 ---
-layout: default
-title: Daniel Oaks
+layout: autogen_index
+title: Everything
 ---
-
-<h1>Everything</h1>
-{% include paginate.html %}
-
-<div class="posts">
-
-    {% for post in paginator.posts %}
-    {% include short_post.html %}
-    {% endfor %}
-
-</div>
-
-{% include paginate.html %}
