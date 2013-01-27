@@ -83,7 +83,7 @@ module Jekyll
       #
       # site - The Site.
       # category - The category, (default: false).
-      # tag = The tag, (default: false).
+      # tag - The tag, (default: false).
       #
       # Returns a string that can is used as: returned.sub(':num', number)
       def paginate_path(site, category = false, tag = false)

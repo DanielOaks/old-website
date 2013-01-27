@@ -38,11 +38,13 @@ module Jekyll
     #
     # site - The Site
     def generate(site)
-      site.categories.keys.each do |category|
-        site.pages << CategoryPage.new(site, site.source, category, category)
-      end
-      site.tags.keys.each do |tag|
-        site.pages << TagPage.new(site, site.source, tag, tag)
+      if site.layouts.key? 'autogen_index'
+        site.categories.keys.each do |category|
+          site.pages << CategoryPage.new(site, site.source, category, category)
+        end
+        site.tags.keys.each do |tag|
+          site.pages << TagPage.new(site, site.source, tag, tag)
+        end
       end
     end
   end

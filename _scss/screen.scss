@@ -172,13 +172,15 @@ code, .highlight {
 }
 code {
     padding: 2pt 3pt 1pt;
+    margin: 0 1pt;
     font-size: 14px;
 }
 .highlight {
     display: block;
-    overflow-x: scroll;
+    overflow-x: auto;
     line-height: 19px;
-    padding: 7pt 8pt;
+    padding: 8pt 12pt;
+    margin-bottom: 1em;
     & code {
         background: none;
         padding: 0 0;
