@@ -31,17 +31,15 @@
                 <div id="col-l">
                     <h1>New Jekyll site, custom plugins, and GitHub</h1>
 
-<p>I have a new site, developed with Jekyll!</p>
-
-<p>Jekyll is, according to the creators, a simple, blog aware, static site generator. It's written by one of the co-founders of GitHub, Tom Preson-Werner, and is located at <a href="http://jekyllrb.com/">http://jekyllrb.com/</a>.</p>
+<p>Jekyll is, according to its creators, a simple, blog aware, static site generator. It's written by one of the co-founders of GitHub, Tom Preson-Werner, and is located at <a href="http://jekyllrb.com/">http://jekyllrb.com/</a></p>
 
 <p>First off, Jekyll, even for someone who doesn't like Ruby too much, is amazingly awesome. Writing up extensions is a snap (even if I do need to search up some Ruby syntax occasionally), and I really like static sites.</p>
 
-<p>So, let's talk about what I did to get Jekyll working nicely for me:</p>
+<p>So, let's talk about what I did to get Jekyll working nicely for me.</p>
 
 <h2>Category and Tag auto generation</h2>
 
-<p>So basically, I like having a nice url such as <code>danneh.net/music</code> for my <code>music</code> category. I had a search around, and found that there was a prebuilt example on the <a href="https://github.com/mojombo/jekyll/wiki/Plugins">Jekyll wiki pages</a>, score!</p>
+<p>I like having a nice url such as <code>danneh.net/music</code> for my <code>music</code> category (that displays all my <code>music</code> posts, but didn't want to need to manually make all the directories and index pages myself. I had a search around, and found that there was a prebuilt example on the <a href="https://github.com/mojombo/jekyll/wiki/Plugins">Jekyll wiki pages</a> that did what I was looking for. Score!</p>
 
 <p>So this is the default category generation plugin:</p>
 
@@ -103,6 +101,8 @@
 
 <p>And so long as we make sure to keep using autogen.html, it should all be fine.</p>
 
+<h3>Separate category folders</h3>
+
 <p>The second goal, having everything accessed via the category folders themselves, is as simple as changing <code>dir</code>, the third argument for <code>CategoryPage</code>, to the category name:</p>
 
 <div class="highlight"><pre><code class="ruby">        <span class="n">site</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
@@ -112,6 +112,8 @@
 
 
 <p>This generates the page as <code>danneh.net/&lt;category&gt;/index.html</code>, which lets us access it as simply <code>danneh.net/&lt;category&gt;</code>.</p>
+
+<h3>Tag index autogeneration</h3>
 
 <p>Our third goal, handling tags, is also crazily simple to implement. Let's take a look at that.</p>
 
@@ -154,15 +156,16 @@
 
 <p>The code that I based mine on, <a href="http://www.marran.com/tech/category-pagination-in-jekyll/">Keith Marran's pagination code</a>, doesn't look like it requires that — however, I couldn't get that working straight up, so I decided to modify the base Jekyll Pagination object myself.</p>
 
-<p>… To be written</p>
+<p>Jekyll's default Pagination object is <a href="https://github.com/mojombo/jekyll/blob/master/lib/jekyll/generators/pagination.rb">on GitHub</a>. I decided not to include it here for size reasons.</p>
+
+<p>Now, Marran's code uses a custom <code>CategoryPager</code> object in order to handle categories, specifically. I decided to go the route of modifying the default Pager object to search for YAML <code>category</code> and <code>tag</code> attributes, instead.</p>
+
+<p>If the index you use the paginator on has <code>category music</code>, I figure the user probably wants the music posts returned. Same as if the user has <code>tag jekyll</code>, I figure that they want the jekyll tagged posts returned.</p>
+
+<p>…To be continued</p>
 
 <p>You can find the completed code for <code>new_pagination.rb</code> <a href="https://github.com/Danneh/danneh.github.com/blob/source/_plugins/new_pagination.rb">on GitHub.</a></p>
 
-
-<div class="tags">
-    Tags:
-    <a href="/tags/jekyll">jekyll</a>
-</div>
 
                 </div>
                 
