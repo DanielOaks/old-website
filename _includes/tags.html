@@ -1,4 +1,4 @@
-{% if page.tags %}
+{% if page.tags.keys != [] %}
 <div class="tags">
     Tags:{% for tag in page.tags %}
     <a href="/tags/{{ tag }}">{{ tag }}</a>{% endfor %}
