@@ -41,108 +41,166 @@
 
 <p>I like having a nice url such as <code>danneh.net/music</code> for my <code>music</code> category (that displays all my <code>music</code> posts, but didn't want to need to manually make all the directories and index pages myself. I had a search around, and found that there was a prebuilt example on the <a href="https://github.com/mojombo/jekyll/wiki/Plugins">Jekyll wiki pages</a> that did what I was looking for. Score!</p>
 
-<p>So this is the default category generation plugin:</p>
+<p>The problem with this, however, is that I need to generate the index pages <em>before</em> the Pagination object can get its hands on them. Because this plugin runs after Pagination, I needed to switch to <a href="http://rfelix.com/2010/01/19/jekyll-extensions-minus-equal-pain/">eJekyll</a> instead, and modify its <a href="https://github.com/rfelix/my_jekyll_extensions/blob/master/category_gen/category_gen.rb">category</a> and <a href="https://github.com/rfelix/my_jekyll_extensions/blob/master/tag_gen/tag_gen.rb">tag generation</a> plugins.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">module</span> <span class="nn">Jekyll</span>
+<p>So this is the default category generation extension:</p>
 
-  <span class="k">class</span> <span class="nc">CategoryPage</span> <span class="o">&lt;</span> <span class="no">Page</span>
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-      <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
-      <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
-      <span class="vi">@dir</span> <span class="o">=</span> <span class="n">dir</span>
-      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
-
-      <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;category_index.html&#39;</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;category&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">category</span>
-
-      <span class="n">category_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Category: &#39;</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">category_title_prefix</span><span class="si">}#{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-  <span class="k">class</span> <span class="nc">CategoryPageGenerator</span> <span class="o">&lt;</span> <span class="no">Generator</span>
-    <span class="n">safe</span> <span class="kp">true</span>
-    
-    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="n">site</span><span class="p">)</span>
-      <span class="k">if</span> <span class="n">site</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;category_index&#39;</span>
-        <span class="n">dir</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;categories&#39;</span>
-        <span class="n">site</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
-          <span class="n">site</span><span class="o">.</span><span class="n">pages</span> <span class="o">&lt;&lt;</span> <span class="no">CategoryPage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">),</span> <span class="n">category</span><span class="p">)</span>
-        <span class="k">end</span>
-      <span class="k">end</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-
-<span class="k">end</span>
+<div class="highlight"><pre><code class="ruby"><span class="lineno"> 1</span> <span class="k">module</span> <span class="nn">Jekyll</span>
+<span class="lineno"> 2</span>   
+<span class="lineno"> 3</span>   <span class="k">class</span> <span class="nc">CategoryIndex</span> <span class="o">&lt;</span> <span class="no">Page</span>
+<span class="lineno"> 4</span>     <span class="c1"># Initialize a new CategoryIndex.</span>
+<span class="lineno"> 5</span>     <span class="c1"># +base+ is the String path to the &lt;source&gt;</span>
+<span class="lineno"> 6</span>     <span class="c1"># +dir+ is the String path between &lt;source&gt; and the file</span>
+<span class="lineno"> 7</span>     <span class="c1">#</span>
+<span class="lineno"> 8</span>     <span class="c1"># Returns &lt;CategoryIndex&gt;</span>
+<span class="lineno"> 9</span>     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">10</span>       <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
+<span class="lineno">11</span>       <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
+<span class="lineno">12</span>       <span class="vi">@dir</span> <span class="o">=</span> <span class="n">dir</span>
+<span class="lineno">13</span>       <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
+<span class="lineno">14</span>       <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
+<span class="lineno">15</span>       <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;category_index.html&#39;</span><span class="p">)</span>
+<span class="lineno">16</span>       <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;category&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="n">category</span>
+<span class="lineno">17</span>       <span class="n">category_title_prefix</span> <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Category: &#39;</span>
+<span class="lineno">18</span>       <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">category_title_prefix</span><span class="si">}#{</span><span class="n">category</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="lineno">19</span>     <span class="k">end</span>
+<span class="lineno">20</span>   <span class="k">end</span>
+<span class="lineno">21</span>   
+<span class="lineno">22</span>   <span class="k">class</span> <span class="nc">Site</span>
+<span class="lineno">23</span>     <span class="c1"># Write each category page</span>
+<span class="lineno">24</span>     <span class="c1">#</span>
+<span class="lineno">25</span>     <span class="c1"># Returns nothing</span>
+<span class="lineno">26</span>     <span class="k">def</span> <span class="nf">write_category_index</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">27</span>       <span class="n">index</span> <span class="o">=</span> <span class="no">CategoryIndex</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">28</span>       <span class="n">index</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="p">,</span> <span class="n">site_payload</span><span class="p">)</span>
+<span class="lineno">29</span>       <span class="n">index</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">dest</span><span class="p">)</span>
+<span class="lineno">30</span>     <span class="k">end</span>
+<span class="lineno">31</span> 
+<span class="lineno">32</span>     <span class="k">def</span> <span class="nf">write_category_indexes</span>
+<span class="lineno">33</span>       <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;category_index&#39;</span>
+<span class="lineno">34</span>         <span class="n">dir</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;categories&#39;</span>
+<span class="lineno">35</span>         <span class="nb">self</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+<span class="lineno">36</span>           <span class="nb">self</span><span class="o">.</span><span class="n">write_category_index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">),</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">37</span>         <span class="k">end</span>
+<span class="lineno">38</span>       <span class="k">end</span>
+<span class="lineno">39</span>     <span class="k">end</span>
+<span class="lineno">40</span>   <span class="k">end</span>
+<span class="lineno">41</span>   
+<span class="lineno">42</span>   <span class="no">AOP</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="no">Site</span><span class="p">,</span> <span class="ss">:write</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">site_instance</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+<span class="lineno">43</span>     <span class="n">site_instance</span><span class="o">.</span><span class="n">write_category_indexes</span>
+<span class="lineno">44</span>   <span class="k">end</span>
+<span class="lineno">45</span> <span class="k">end</span>
 </code></pre></div>
 
 
 <p>Fairly simple, and it works alright. However, there are a few differences that I'd like to make:</p>
 
 <ul>
-<li>First off, I use quite a simple structure, and only need a single layout for /all/ the autogenerated list pages (categories, tags, even the main site index), so let's use that instead of <code>category_index.html</code></li>
+<li>First off, I need to fix the generation for my purposes, so that it adds the pages so that Pagination can actually parse them</li>
+<li>I use quite a simple structure, and only need a single layout for /all/ the autogenerated list pages (categories, tags, even the main site index), so let's use that instead of <code>category_index.html</code></li>
 <li>Rather than having everything accessed through <code>danneh.net/category/&lt;category&gt;</code>, I'd rather it simply put the index page in the category's directory, like <code>danneh.net/&lt;category&gt;</code> instead.</li>
-<li>Finally, this only handles categories, whereas I would like it to support tags as well</li>
+<li>Add/Merge the Tag index support into this extension</li>
 </ul>
 
 
+<h3>Fixing generation for Pagination</h3>
+
+<p>By default, this plugin writes the index pages directly to the output directory. However, we are looking to instead parse them with Pagination before we write them, so that won't do. The CategoryPageGenerator plugin on the <a href="https://github.com/mojombo/jekyll/wiki/Plugins">Jekyll wiki pages</a> writes the pages in such a way that they can be parsed, so let's switch this extension to do that, instead.</p>
+
+<p>First off, we need to switch it to run before the <code>Site.generate</code> method, so let's do that:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno">42</span>   <span class="no">AOP</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="no">Site</span><span class="p">,</span> <span class="ss">:write</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">site_instance</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+</code></pre></div>
+
+
+
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno">42</span>   <span class="no">AOP</span><span class="o">.</span><span class="n">before</span><span class="p">(</span><span class="no">Site</span><span class="p">,</span> <span class="ss">:generate</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">site_instance</span><span class="p">,</span> <span class="n">args</span><span class="o">|</span>
+</code></pre></div>
+
+
+<p>Fairly simple. Now, if we look at the CategoryPageGenerator plugin, that outputs new pages with <code>Site.pages &lt;&lt; newpage</code>. That is so the site can go and run all the generators over it.</p>
+
+<p>This extension writes it directly to the output directory, so we need to make it simply output it to the <code>Site.pages</code> object. Let's switch that over:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno">26</span>     <span class="k">def</span> <span class="nf">write_category_index</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">27</span>       <span class="n">index</span> <span class="o">=</span> <span class="no">CategoryIndex</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">28</span>       <span class="n">index</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="p">,</span> <span class="n">site_payload</span><span class="p">)</span>
+<span class="lineno">29</span>       <span class="n">index</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">self</span><span class="o">.</span><span class="n">dest</span><span class="p">)</span>
+<span class="lineno">30</span>     <span class="k">end</span>
+<span class="lineno">31</span> 
+<span class="lineno">32</span>     <span class="k">def</span> <span class="nf">write_category_indexes</span>
+<span class="lineno">33</span>       <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;autogen_index&#39;</span>
+<span class="lineno">34</span>         <span class="n">dir</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;category_dir&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;categories&#39;</span>
+<span class="lineno">35</span>         <span class="nb">self</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+<span class="lineno">36</span>           <span class="nb">self</span><span class="o">.</span><span class="n">write_category_index</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">),</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">37</span>         <span class="k">end</span>
+<span class="lineno">38</span>       <span class="k">end</span>
+<span class="lineno">39</span>     <span class="k">end</span>
+</code></pre></div>
+
+
+
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno">26</span>     <span class="k">def</span> <span class="nf">write_category_indexes</span>
+<span class="lineno">27</span>       <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;autogen_index&#39;</span>
+<span class="lineno">28</span>         <span class="nb">self</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
+<span class="lineno">29</span>           <span class="nb">self</span><span class="o">.</span><span class="n">pages</span> <span class="o">&lt;&lt;</span> <span class="no">CategoryIndex</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="nb">self</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">30</span>         <span class="k">end</span>
+<span class="lineno">31</span>       <span class="k">end</span>
+<span class="lineno">32</span>     <span class="k">end</span>
+</code></pre></div>
+
+
+<p>If you'll notice, I also changed the way we call <code>CategoryIndex</code>. I decided to push our third goal, the separating category indexes into their folders, in this as well.</p>
+
+<p>What I did up in CategoryIndex is shown here:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno"> 9</span>     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">10</span>       <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
+<span class="lineno">11</span>       <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
+<span class="lineno">12</span>       <span class="vi">@dir</span> <span class="o">=</span> <span class="n">dir</span>
+</code></pre></div>
+
+
+
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno"> 9</span>     <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
+<span class="lineno">10</span>       <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
+<span class="lineno">11</span>       <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
+<span class="lineno">12</span>       <span class="vi">@dir</span> <span class="o">=</span> <span class="n">category</span>
+</code></pre></div>
+
+
+<h3>Autogen</h3>
+
 <p>So, changing to <code>autogen_index.html</code> is fairly simple, we just change:</p>
 
-<div class="highlight"><pre><code class="ruby">      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;category_index.html&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><code class="ruby"><span class="lineno">15</span>       <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;category_index.html&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p>to:</p>
 
-<div class="highlight"><pre><code class="ruby">      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;autogen_index.html&#39;</span><span class="p">)</span>
+
+<div class="highlight"><pre><code class="ruby"><span class="lineno">15</span>       <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;autogen_index.html&#39;</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p>And so long as we make sure to keep using autogen.html, it should all be fine.</p>
+<p>and</p>
 
-<h3>Separate category folders</h3>
-
-<p>The second goal, having everything accessed via the category folders themselves, is as simple as changing <code>dir</code>, the third argument for <code>CategoryPage</code>, to the category name:</p>
-
-<div class="highlight"><pre><code class="ruby">        <span class="n">site</span><span class="o">.</span><span class="n">categories</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">category</span><span class="o">|</span>
-          <span class="n">site</span><span class="o">.</span><span class="n">pages</span> <span class="o">&lt;&lt;</span> <span class="no">CategoryPage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">category</span><span class="p">)</span>
-        <span class="k">end</span>
+<div class="highlight"><pre><code class="ruby"><span class="lineno">33</span>       <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;category_index&#39;</span>
 </code></pre></div>
 
 
-<p>This generates the page as <code>danneh.net/&lt;category&gt;/index.html</code>, which lets us access it as simply <code>danneh.net/&lt;category&gt;</code>.</p>
 
-<h3>Tag index autogeneration</h3>
 
-<p>Our third goal, handling tags, is also crazily simple to implement. Let's take a look at that.</p>
-
-<p>This part, <code>TagPage</code> is basically a complete copy of <code>CategoryPage</code>. The only difference is that, similar to how the categories worked, we do actually want to access this through <code>danneh.net/tags/&lt;tag&gt;</code>. We do that with the <code>@dir =</code> line.</p>
-
-<div class="highlight"><pre><code class="ruby">  <span class="k">class</span> <span class="nc">TagPage</span> <span class="o">&lt;</span> <span class="no">Page</span>
-    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">base</span><span class="p">,</span> <span class="n">dir</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
-      <span class="vi">@site</span> <span class="o">=</span> <span class="n">site</span>
-      <span class="vi">@base</span> <span class="o">=</span> <span class="n">base</span>
-      <span class="vi">@dir</span> <span class="o">=</span> <span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="n">dir</span><span class="p">)</span>
-      <span class="vi">@name</span> <span class="o">=</span> <span class="s1">&#39;index.html&#39;</span>
-
-      <span class="nb">self</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="vi">@name</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">read_yaml</span><span class="p">(</span><span class="no">File</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="s1">&#39;_layouts&#39;</span><span class="p">),</span> <span class="s1">&#39;autogen_index.html&#39;</span><span class="p">)</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;tag&#39;</span><span class="o">]</span>   <span class="o">=</span> <span class="n">tag</span>
-      <span class="n">title_prefix</span>       <span class="o">=</span> <span class="n">site</span><span class="o">.</span><span class="n">config</span><span class="o">[</span><span class="s1">&#39;tag_title_prefix&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;Tag: &#39;</span>
-      <span class="nb">self</span><span class="o">.</span><span class="n">data</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">#{</span><span class="n">title_prefix</span><span class="si">}#{</span><span class="n">tag</span><span class="o">.</span><span class="n">capitalize</span><span class="si">}</span><span class="s2">&quot;</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
+<div class="highlight"><pre><code class="ruby"><span class="lineno">33</span>       <span class="k">if</span> <span class="nb">self</span><span class="o">.</span><span class="n">layouts</span><span class="o">.</span><span class="n">key?</span> <span class="s1">&#39;autogen_index&#39;</span>
 </code></pre></div>
 
 
-<p>And this part is actually having the tag pages generated for each site tag, similar to how the category pages are created for each category:</p>
+<h3>Tag support</h3>
 
-<div class="highlight"><pre><code class="ruby">        <span class="n">site</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">tag</span><span class="o">|</span>
-          <span class="n">site</span><span class="o">.</span><span class="n">pages</span> <span class="o">&lt;&lt;</span> <span class="no">TagPage</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">site</span><span class="p">,</span> <span class="n">site</span><span class="o">.</span><span class="n">source</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">tag</span><span class="p">)</span>
-        <span class="k">end</span>
-</code></pre></div>
-
+<p>I didn't describe this step, mostly because it's essentially what I did for the base category extension without step 3.</p>
 
 <p>You can find the completed code for <code>page_generation.rb</code> <a href="https://github.com/Danneh/danneh.github.com/blob/source/_plugins/page_generation.rb">on GitHub.</a></p>
 
@@ -152,9 +210,7 @@
 
 <p>By default, Jekyll only support pagination for the site index. You want your category and tag pages that don't have a thousand posts? Sorry, you're gonna need a custom plugin.</p>
 
-<p>Now, most of the plugins for category pagination I've seen requires changing the way you call your pagination object, to a category-specific object.</p>
-
-<p>The code that I based mine on, <a href="http://www.marran.com/tech/category-pagination-in-jekyll/">Keith Marran's pagination code</a>, doesn't look like it requires that — however, I couldn't get that working straight up, so I decided to modify the base Jekyll Pagination object myself.</p>
+<p>The code that I based mine on, <a href="http://www.marran.com/tech/category-pagination-in-jekyll/">Keith Marran's pagination code</a>, modifies the Pagination object itself. Now, in the current gem version of Jekyll, that all works fine. However, with the newest version on GitHub, that doesn't work, so I had to make my own Jekyll fork.</p>
 
 <p>Jekyll's default Pagination object is <a href="https://github.com/mojombo/jekyll/blob/master/lib/jekyll/generators/pagination.rb">on GitHub</a>. I decided not to include it here for size reasons.</p>
 
@@ -186,7 +242,7 @@
                         <li><a href="http://steamcommunity.com/id/dan11999922">Steam Community</a></li>
                     </ul>
 
-                    <a href="https://github.com/Danneh/danneh.github.com"><img style="margin: 15pt auto 0" alt="Kitty" src="/img/kitty.png" /></a>
+                    <a href="https://github.com/Danneh/danneh.github.com"><img style="display: block; margin: 15pt auto 0;" alt="Kitty" src="/img/kitty.png" /></a>
                 </div>
                 
                 <div class="col-clear"></div>
