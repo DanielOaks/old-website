@@ -12,7 +12,7 @@ paginate: 8
 paginate_path: page/:num
 
 # And building into custom directory
-destination: ../danneh.github.com.production/_site
+destination: ../danieloaks.github.com.production/_site
 
 pygments: true
 markdown: rdiscount
