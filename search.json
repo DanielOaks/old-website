@@ -1,13 +1,13 @@
 [
     ["blog", "New Jekyll site, custom plugins, and GitHub", "new, site, jekyll, plugin, github", "/blog/2013/01/23/new_site.html"],
-    ["music", "Pointy", "game, draft, point", "https://soundcloud.com/danneh/pointy"],
+    ["music", "Pointy", "game, draft, point", "https://soundcloud.com/danieloaks/pointy"],
     ["design", "Kana", "japan, poster", "/files/kana.pdf"],
     ["design", "MLP:RiM", "roleplaying, magic, rpg, mlp, my little pony, tabletop", "/design/2013/01/22/08-mlprim.html"],
     ["code", "Goshubot", "python, python3, irc, github, goshu", "/code/2013/01/22/05-goshubot.html"],
     ["photos", "Laker", "lake, autumn, leaves, water", "https://secure.flickr.com/photos/dannehoaks/5920881549"],
-    ["music", "Show", "fl, studio, fruity, loops", "https://soundcloud.com/danneh/show"],
+    ["music", "Show", "fl, studio, fruity, loops", "https://soundcloud.com/danieloaks/show"],
     ["code", "Vilo", "python, python3, nico, japan, video, image, media, github", "/code/2013/01/22/02-vilo.html"],
     ["design", "EquinoxNet", "equinox, net, irc", "/design/2013/01/22/01-equinoxnet.html"],
-    ["music", "Red", "chiptune, milkytracker", "https://soundcloud.com/danneh/red"],
+    ["music", "Red", "chiptune, milkytracker", "https://soundcloud.com/danieloaks/red"],
     false
 ]
