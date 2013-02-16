@@ -3,9 +3,9 @@
                         {{ post.embed }}
                     </div>
                     {% elsif post.type == "image" %}
-                    <a class="post image" href="{{ post.url }}"><img src="/img/post/{{ post.image }}" /></a>
+                    <a class="post image" style="background-color: {{ post.bgcolor }};" href="{{ post.url }}"><img src="/img/post/{{ post.image }}" /></a>
                     {% elsif post.type == "imagelink" %}
-                    <a class="post image" href="{{ post.link }}"><img src="/img/post/{{ post.image }}" /></a>
+                    <a class="post image" style="background-color: {{ post.bgcolor }};" href="{{ post.link }}"><img src="/img/post/{{ post.image }}" /></a>
                     {% elsif post.type == "shortlink" %}
                     <a class="post {{ post.category }}" href="{{ post.link }}">
                         <h2>{{ post.title }}</h2> <span class="time">{{ post.date | date_to_string }}</span>
