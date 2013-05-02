@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+    <head>
+        <title>Free the Stories</title>
+        
+        <!-- Homepage CSS -->
+        <link href="/fonts/delicious.css" rel="stylesheet" type="text/css" />
+
+        <link href="/css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <link href="/css/print.css" media="print" rel="stylesheet" type="text/css" />
+        <!--[if IE]>
+            <link href="/css/ie.css" media="screen, projection" rel="stylesheet" type="text/css" />
+        <![endif]-->
+
+        <meta charset='utf-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="icon" type="image/png" href="/favicon.png" />
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <a class="logo" href="/">Daniel Oaks</a>
+                <a class="b" href="/blog">Blog</a>
+                <a class="b" href="/code">Code</a>
+                <a class="b" href="/design">Design</a>
+                <a class="b" href="/music">Music</a>
+                <a class="b" href="/photos">Photos</a>
+            </div>
+            
+            <div id="content">
+                <!-- Actual content -->
+                <div id="col-l">
+                    <h1>Free the Stories</h1>
+
+<p>Free the Stories was a little fiction site project I joined, with a few guys from Rizon who were dissatisfied with <a href="http://fanfiction.net/">Fanfiction.net's</a> way of running things. Basically, to try and create somewhere authors could post their stories, and not worry about the seemingly archaic way they were running their site, policing stories, and the like.</p>
+
+<p>So I came on a little later than everyone else, and made a visual identity and design for the site. It was my first time using jQuery in a design, to make it a little more dynamic than most of my stuff, and I think it turned out well.</p>
+
+<p>Of course, I overused jQuery like crazy, didn't make it compatible with anything but Firefox/Chrome, and didn't make it accessible to users with small screens, but for a design preview I think it turned out fairly well.</p>
+
+<h2>Idea</h2>
+
+<p>So basically, my idea for FtS was for differing story universes to be separated, similarly to <a href="http://reddit.com/">Reddit's</a> subreddits. As subreddits are used to separate different ideas, interests, and just groups in general, different universes would be used to separate distinct story universes.</p>
+
+<p>For instance, <em>Harry Potter</em>, <em>Discworld</em>, and <em>Twilight</em> would be different universes. As this is primarily designed for stories with a specific universe in mind, stuff like fanfiction and the like, original stories are put under the annoyingly hacky solution of the <em>Originals</em> universe.</p>
+
+<h2>Database Design</h2>
+
+<p>This is one of those fun projects where I was able to help out with our database design (something I love!). Fairly standard design for a fiction site, with the universes tagging each of our stories (and a story being able to be part of multiple universes, such as for crossovers).</p>
+
+<p>So yeah, fairly standard, I'll throw the MySQL Workbench file up later.</p>
+
+<h2>Graphic Design and Theme</h2>
+
+<p>With Free the Stories, the name was already set in stone before I arrived. Not that I mind of course, it's a nice name. Thinking about it got me thinking of being free, open, nice and airy, which is why I went with quite a subdued colour palate for the main site.</p>
+
+<p>The FtS wordmark took a few iterations to get right, the contrast of the smaller, and grey <em>t</em> in the middle was a little bit of work. But all in all, it turned out quite nice.</p>
+
+<p>Quite a lot of the site design was based on another fiction site, <a href="http://fimfiction.net/">FimFiction.net</a>. Their method of displaying stories (at least, when this was around) was quite polished, nicely displayed, and quite good to look at. I eventually leaned away from that, though – especially as I refined and worked out what sort of information we wanted, and didn't want, to display.</p>
+
+<p>One very important thing to know in design, programming, any creative craft really, is to know when to copy, when to modify to your own purposes, and when to simply go your own way entirely. If you never, ever copy, you'll never get any actual work done. If you always copy, you'll never get any <em>original</em> work done. It's similar to knowing when to use libraries and where to write your own code, when programming. Knowing where to strike that balance is key.</p>
+
+<h2>The Site</h2>
+
+<p>Ah, the site itself, finally. If you wanna take a look, <a href="http://fts.danneh.net/">here's</a> the design I ended up with, and let me explain how I got there.</p>
+
+<p>So this is just after I'd learned about and started using jQuery, my favorite Javascript library right now. So, quite a lot of the animations are done with it (despite probably being able to work with CSS animations and smoothing), and a lot of dynamic features litter the site, despite it being just and only a design mockup.</p>
+
+<p>Firstly, the universe list up the top closely resembles the subreddit inspiration, and seemed like a nice way to display them. The auto-scrolling was rejected by the team, so we went with little scroll buttons instead.</p>
+
+<p>The Genres list, and clicking to add/remove them was, I though, quite a nice, dynamic touch. Thinking back on it, I would probably add them to the extended search drop-down bar, and have a way to specify whether you want a genre included, or excluded, but I think it's an interesting concept, and a nice way to handle it.</p>
+
+<p>Of course, if the project had gotten any further, I'd have worked on those issues more, improved the cross-browser compatibility, hopefully toned down a lot of the jQuery, and given the whole thing a bit more 'identity'. But as it stands, I think it turned out quite well, and was a very nice learning experience.</p>
+
+<p>You can find Free the Stories' design <a href="http://fts.danneh.net/">here.</a></p>
+
+
+                </div>
+
+                <!-- Random info -->
+                <div id="col-r">
+                    <div class="static">
+                        <h3>Contact</h3>
+                        <ul>
+                            <li><a href="mailto:danneh@danneh.net">danneh@danneh.net</a></li>
+                        </ul>
+                        
+                        <h3>My Links</h3>
+                        <ul>
+                            <li><a href="https://github.com/DanielOaks">Github</a></li>
+                            <li><a href="https://bitbucket.org/DanielOaks">Bitbucket</a></li>
+                            <li><a href="https://soundcloud.com/danieloaks">Soundcloud</a></li>
+                            <li><a href="https://youtube.com/DannehOaks">Youtube</a></li>
+                            <li class="sep"><a href="https://secure.flickr.com/photos/dannehoaks">Flikr</a></li>
+                            <li><a href="https://userscripts.org/users/192057/scripts">Userscripts</a></li>
+                            <li><a href="http://steamcommunity.com/id/dan11999922">Steam Community</a></li>
+                        </ul>
+
+                        <a href="https://github.com/DanielOaks/danieloaks.github.com"><img style="display: block; margin: 15pt auto 0;" alt="Kitty" src="/img/kitty.png" /></a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer">
+                © Daniel Oaks - Powered by <a href="http://pages.github.com">Github Pages</a> - Using <a href="http://www.famfamfam.com/lab/icons/silk/">Silk</a>, <a href="http://www.exljbris.com/delicious.html">Delicious</a>, <a href="https://github.com/mojombo/jekyll">Jekyll</a>
+            </div>
+        </div>
+    </body>
+</html>
