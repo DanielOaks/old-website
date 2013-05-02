@@ -160,12 +160,16 @@ body {
                 }
                 // Next/Prev
                 .pagination {
-                    display: inline-block;
-                    float: right;
-                    text-align: center;
+                    &:first-of-type a {
+                        margin-top: -3em;
+                    }
+                    &:last-of-type {
+                        height: 2em;
+                    }
                     a {
+                        position: absolute;
+                        right: 0;
                         display: inline-block;
-                        margin: 0 auto;
                         padding: 10pt 15pt;
                     }
                 }
@@ -184,7 +188,6 @@ body {
                     @include box-shadow(10px 0 4px -10px #88b inset);
                     display: table-cell;
                     border-radius: 0 7px 7px 0;
-                    //background-image: url('../img/col-r-shadow.png');
 
                     .static {
                         position: fixed;
@@ -196,6 +199,9 @@ body {
                 @media (max-width: $liquid_small_width) {
                     margin: 20px auto 0;
                     border-radius: 7px;
+                    img {
+                        display: none;
+                    }
                 }
 
                 h3 {
