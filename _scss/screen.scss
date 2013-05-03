@@ -14,6 +14,8 @@ $liquid_small_width: $liquid_width - 1;
 $container_padding: 1rem;
 $header_padding: 1rem;
 $col_padding: 1rem;
+
+$liquid_max_width: 70rem;
 $r_col_width: 12rem;
 
 $logo_fontsize: 3.8rem;
@@ -31,10 +33,12 @@ a {
 // Actual CSS
 body {
     background: #274961 url('../img/bg.png') repeat fixed;
-    font-family: 'Delicious', sans-serif; }
+    font-family: 'Delicious', sans-serif;
+    padding: $container_padding; }
 
     #container {
-        margin: $container_padding; }
+        max-width: $liquid_max_width;
+        margin: 0 auto; }
 
         #header {
             margin-bottom: $header_padding;

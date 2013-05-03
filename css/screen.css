@@ -141,9 +141,9 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 a { text-decoration: none; }
 
-body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Delicious", sans-serif; }
+body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Delicious", sans-serif; padding: 1rem; }
 
-#container { margin: 1rem; }
+#container { max-width: 70rem; margin: 0 auto; }
 
 #header { margin-bottom: 1rem; }
 #header a { -webkit-transition: all 0.14s ease; -webkit-transition-delay: 0s; -moz-transition: all 0.14s ease 0s; -o-transition: all 0.14s ease 0s; transition: all 0.14s ease 0s; display: inline-block; margin-right: 0.5rem; color: #eee; }
