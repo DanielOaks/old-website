@@ -1,6 +1,6 @@
-{% if (page.tags.size.to_i > 0) %}
+{% if page.tags.size > 0 %}
 <div class="tags">
-    Tags:{% for tag in page.tags %}
-    <a href="/tags/{{ tag }}">{{ tag }}</a>{% endfor %}
+    Tags:
+    {% for tag in page.tags %}<a href="/tags/{{ tag }}">{{ tag }}</a>{% endfor %}
 </div>
 {% endif %}

@@ -141,7 +141,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 a { text-decoration: none; }
 
-body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Delicious", sans-serif; padding: 1rem; }
+body { background: #274961 url("../img/bg.png") repeat fixed; font-family: 'Delicious', sans-serif; padding: 1rem; }
 
 #container { max-width: 70rem; margin: 0 auto; }
 
@@ -162,7 +162,7 @@ body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Deli
 #col-l .post.image { overflow: hidden; }
 #col-l .post.image img { display: block; margin: 0 auto; max-width: 100%; }
 #col-l .post.blog, #col-l .post.code, #col-l .post.design, #col-l .post.image { border-radius: 4px 0 0 4px; }
-#col-l .post.blog, #col-l .post.code, #col-l .post.design { padding: 0.7rem 2rem 0.7rem 3.5rem; border-width: 1px 0 1px 1px; border-style: solid; background-position: 1.3rem 1.1rem; background-repeat: no-repeat; }
+#col-l .post.blog, #col-l .post.code, #col-l .post.design { padding: .7rem 2rem .7rem 3.5rem; border-width: 1px 0 1px 1px; border-style: solid; background-position: 1.3rem 1.1rem; background-repeat: no-repeat; }
 #col-l .post.image { background: #9a9a9a; }
 #col-l .post.code { border-color: #c8c8c8; background-color: #dadada; background-image: url("../img/icons/code.png"); }
 #col-l .post.blog { border-color: #a6afff; background-color: #cacfff; background-image: url("../img/icons/blog.png"); }
@@ -176,10 +176,13 @@ body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Deli
 #col-l p + p { text-indent: 1em; }
 #col-l ul li { margin-bottom: 1em; margin-left: 1em; list-style: square; }
 #col-l .tags { margin-top: 2em; }
+#col-l .tags a:not(:last-of-type):after { content: ", "; }
 #col-l .link { display: block; float: right; }
-#col-l .pagination:first-of-type a { margin-top: -3em; }
-#col-l .pagination:last-of-type { height: 2em; }
-#col-l .pagination a { position: absolute; right: 0; display: inline-block; padding: 10pt 15pt; }
+#col-l .posts.paginate-bottom { padding-bottom: 3rem; }
+#col-l nav.pagination-nav { display: inline-block; position: absolute; right: 0; margin-top: 0.5rem; }
+#col-l nav.pagination-nav:first-of-type a { margin-top: -3em; }
+#col-l nav.pagination-nav:last-of-type { height: 2em; margin-top: -2.5rem; }
+#col-l nav.pagination-nav a { display: inline-block; padding: 10pt 15pt; }
 
 #col-r { padding: 1rem; width: 12rem; background: #9abbd2 left repeat-y; font-size: 10pt; font-family: "Trebuchet MS", Helvetica, sans-serif; line-height: 1.2; }
 @media (min-width: 750px) { #col-r { -webkit-box-shadow: 10px 0 4px -10px #8888bb inset; -moz-box-shadow: 10px 0 4px -10px #8888bb inset; box-shadow: 10px 0 4px -10px #8888bb inset; display: table-cell; border-radius: 0 7px 7px 0; }
@@ -196,7 +199,7 @@ body { background: #274961 url("../img/bg.png") repeat fixed; font-family: "Deli
 
 pre, code, tt { font-family: Consolas, "Liberation Mono", Courier, monospace; }
 
-code, .highlight, .highlighttable { border: 1px #cccccc solid; background: #f8f8f8; }
+code, .highlight, .highlighttable { border: 1px #ccc solid; background: #f8f8f8; }
 
 code { margin: 0 1pt; padding: 1pt 3pt; border-radius: 3pt; font-size: 14px; }
 
@@ -204,4 +207,5 @@ code { margin: 0 1pt; padding: 1pt 3pt; border-radius: 3pt; font-size: 14px; }
 .highlight code, .highlighttable code { padding: 0; border: none; background: none; font-size: 13px; }
 
 .highlighttable { font-size: 14px; }
-.highlighttable code, .highlighttable .highlight { margin: 0; padding: 0; border: none; background: none; font-size: 13px; }
+.highlighttable .linenodiv { margin-right: 1rem; }
+.highlighttable code, .highlighttable .highlight, .highlighttable .linenos { margin: 0; padding: 0; border: none; background: none; font-size: 13px; }

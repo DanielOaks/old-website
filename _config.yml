@@ -10,6 +10,7 @@ exclude:
 # Enable Pagination, because we're awesome like that
 paginate: 8
 paginate_path: page/:num
+category_title_prefix: ''
 
 # And building into custom directory
 destination: ../danieloaks.github.com.production/_site

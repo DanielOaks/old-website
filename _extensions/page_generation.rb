@@ -53,7 +53,7 @@ module Jekyll
       end
       # END MODIFIED
       tag_title_prefix = site.config['tag_title_prefix'] || 'Tag: '
-      self.data['title'] = "#{tag_title_prefix}#{tag.capitalize}"
+      self.data['title'] = "#{tag_title_prefix}#{tag.gsub(/\b('?[a-z])/) { $1.capitalize }}"
     end
   end
 

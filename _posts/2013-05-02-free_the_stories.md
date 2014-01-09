@@ -2,12 +2,15 @@
 layout: post
 title: Free the Stories
 category: design
-tag: rizon
 
 type: default
 short: Free the Stories was a planned fiction site/network, which I was designing for. 
 
 search_desc: fts, rizon, web design, jquery
+
+tags:
+- rizon
+- web design
 ---
 
 # {{ page.title }}
@@ -42,7 +45,7 @@ One very important thing to know in design, programming, any creative craft real
 
 ## The Site
 
-Ah, the site itself, finally. If you wanna take a look, [here's](http://fts.danneh.net/) the design I ended up with, and let me explain how I got there.
+Ah, the site itself, finally. If you wanna take a look, [here's](http://fts.danieloaks.net/) the design I ended up with, and let me explain how I got there.
 
 So this is just after I'd learned about and started using jQuery, my favorite Javascript library right now. So, quite a lot of the animations are done with it (despite probably being able to work with CSS animations and smoothing), and a lot of dynamic features litter the site, despite it being just and only a design mockup.
 
@@ -52,4 +55,4 @@ The Genres list, and clicking to add/remove them was, I though, quite a nice, dy
 
 Of course, if the project had gotten any further, I'd have worked on those issues more, improved the cross-browser compatibility, hopefully toned down a lot of the jQuery, and given the whole thing a bit more 'identity'. But as it stands, I think it turned out quite well, and was a very nice learning experience.
 
-You can find Free the Stories' design [here.](http://fts.danneh.net/)
+You can find Free the Stories' design [here.](http://fts.danieloaks.net/)

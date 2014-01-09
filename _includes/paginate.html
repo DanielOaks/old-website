@@ -1,4 +1,4 @@
-                    <nav class="pagination">{% if paginator.previous_page %}{% if paginator.previous_page == 1 %}
+                    <nav class="pagination-nav">{% if paginator.previous_page %}{% if paginator.previous_page == 1 %}
                         <a class="prev" href="/" title="Previous Page">&laquo; Previous</a>{% else %}<a class="prev" href="{{ paginator.previous_page_url }}" title="Previous Page">&laquo; Previous</a>{% endif %}{% endif %}{% if paginator.next_page %}
                         <a class="next" href="{{ paginator.next_page_url }}" title="Next Page">Next &raquo;</a>{% endif %}
                     </nav>

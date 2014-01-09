@@ -2,5 +2,5 @@
 ---
 [
 {% for post in site.posts limit:200 %}    ["{{ post.category }}", "{% if post.json_title %}{{ post.json_title }}{% else %}{{ post.title }}{% endif %}", "{% if post.search_desc %}{{ post.search_desc }}{% else %}{{ post.short }}{% endif %}", "{% if post.search_url == "url" %}{{ post.url }}{% elsif post.link %}{{ post.link }}{% else %}{{ post.url }}{% endif %}"],
-{% endfor %}    false
+{% endfor %}    []
 ]

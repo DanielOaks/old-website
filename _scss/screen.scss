@@ -157,22 +157,32 @@ body {
                 }
                 .tags {
                     margin-top: 2em;
+                    a:not(:last-of-type):after {
+                        content: ", "
+                    }
                 }
                 .link {
                     display: block;
                     float: right;
                 }
+                .posts.paginate-bottom {
+                    padding-bottom: 3rem;
+                }
                 // Next/Prev
-                .pagination {
+                nav.pagination-nav {
+                    display: inline-block;
+                    position: absolute;
+                    right: 0;
+                    margin-top: 0.5rem;
+                    // top: 2rem;
                     &:first-of-type a {
                         margin-top: -3em;
                     }
                     &:last-of-type {
                         height: 2em;
+                        margin-top: -2.5rem;
                     }
                     a {
-                        position: absolute;
-                        right: 0;
                         display: inline-block;
                         padding: 10pt 15pt;
                     }
@@ -271,7 +281,10 @@ code {
 }
 .highlighttable {
     font-size: 14px;
-    & code, & .highlight {
+    .linenodiv {
+        margin-right: 1rem
+    }
+    code, .highlight, .linenos {
         margin: 0;
         padding: 0;
         border: none;
